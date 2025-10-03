@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:job_founder/main.dart';
-import 'package:job_founder/features/onBarding/on_boarding_screen.dart';
+import 'package:job_founder/features/onBoarding/on_boarding_screen.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

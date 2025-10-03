@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/helper/strings.dart';
 import '../../../core/theme/colors.dart';
+import '../../auth/login/login.dart';
 
 class OnBoardingButtonsRow extends StatelessWidget {
   const OnBoardingButtonsRow({
@@ -21,7 +22,9 @@ class OnBoardingButtonsRow extends StatelessWidget {
             backgroundColor: AppColors.primaryColor,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> const LoginPage()));
+          },
           child:const Text(Strings.loginText,style: TextStyle(
             color: Colors.white,fontWeight: FontWeight.bold,
     
