@@ -16,15 +16,17 @@ class OnBoardingScreen extends StatelessWidget {
     return  Scaffold(
       backgroundColor: Colors.white,
       appBar: const PreferredSize(child: OnBoardingAppBar(), preferredSize: Size.fromHeight(60)),
-      body: Padding(padding: const EdgeInsets.symmetric(horizontal: 20),child: Column(children: [
-        Image.asset(Images.onBoardingImage),
-        const SizedBox(height: 20,),
-        
-         OnBoardingTitle(),
-        OnBoardingDescription(),
-        const SizedBox(height: 30,),
-        OnBoardingButtonsRow()
-      ],),),
+      body: Padding(padding: const EdgeInsets.symmetric(horizontal: 20),child: SingleChildScrollView(
+        child: Column(children: [
+          Image.asset(Images.onBoardingImage),
+          const SizedBox(height: 20,),
+          
+           OnBoardingTitle(),
+          OnBoardingDescription(),
+          const SizedBox(height: 30,),
+          OnBoardingButtonsRow()
+        ],),
+      ),),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../core/helper/strings.dart';
 import '../../../core/theme/colors.dart';
 import '../../auth/login/login.dart';
+import '../../auth/register/register.dart';
 
 class OnBoardingButtonsRow extends StatelessWidget {
   const OnBoardingButtonsRow({
@@ -31,7 +32,9 @@ class OnBoardingButtonsRow extends StatelessWidget {
           ),),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> const RegisterPage()));
+          },
           child:const Text(Strings.registerText,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.black)),
     
         ),

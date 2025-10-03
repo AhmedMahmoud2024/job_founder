@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+import 'package:flutter/material.dart';
+
+import '../../../core/helper/strings.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/styles.dart';
 import '../register/register.dart';
+import 'widgets/custom_material_button.dart';
 import 'widgets/custom_text_field.dart';
 
 class LoginPage extends StatelessWidget {
@@ -18,39 +20,29 @@ class LoginPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Text("Login here",style:Styles.popiansBold24
+              Text(Strings.loginPageText,style:Styles.popiansBold24
               ),
               SizedBox(height: 34,),
-               Text("Welcome back you have been missed!",style:Styles.medium16,),
+               Text(Strings.loginPageWelcomeBackText,style:Styles.medium16,),
               SizedBox(height: 89,),
-              CustomTextField(hintText: 'Email',),
+              CustomTextField(hintText: Strings.emailHintText,),
               SizedBox(height: 29,),
-              CustomTextField(hintText: 'Password',),
+              CustomTextField(hintText: Strings.passwordHintText,),
               SizedBox(height: 30,),
               Align(
                 alignment: Alignment.topRight,
-                child: Text("Forget Your Password?",style:Styles.popiansSemiBold14.copyWith(
+                child: Text(Strings.forgetYourPasswordText,style:Styles.popiansSemiBold14.copyWith(
                   color: AppColors.primaryColor
                 )),
               ),
               SizedBox(height: 30,),
-              MaterialButton(onPressed: (){},
-              color:AppColors.primaryColor,
-              minWidth: 323,
-              height:60,
-              elevation:7,
-              textColor: Colors.white,
-              shape:RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10)
-              ),
-              child:Text("Sign In",style:Styles.popiansSemiBold14.copyWith(fontSize: 20))
-              ),
+              CustomMaterialButton(MaterialButtonText: Strings.signInText),
               SizedBox(height: 40,),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
                 },
-                child: Text("Create New Account",style:Styles.popiansSemiBold14))
+                child: Text(Strings.createNewAccountText,style:Styles.popiansSemiBold14))
             ],
           ),
         ),
@@ -58,4 +50,6 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
+
 
