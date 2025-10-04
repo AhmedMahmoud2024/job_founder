@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../core/helper/strings.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/styles.dart';
+import '../../bottom_nav_bar_screen.dart';
 import '../register/register.dart';
 import 'widgets/custom_material_button.dart';
 import 'widgets/custom_text_field.dart';
@@ -36,7 +37,9 @@ class LoginPage extends StatelessWidget {
                 )),
               ),
               SizedBox(height: 30,),
-              CustomMaterialButton(MaterialButtonText: Strings.signInText),
+              CustomMaterialButton(onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavBarScreen()));
+              },MaterialButtonText: Strings.signInText),
               SizedBox(height: 40,),
               GestureDetector(
                 onTap: () {

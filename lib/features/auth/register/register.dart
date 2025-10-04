@@ -30,7 +30,9 @@ class RegisterPage extends StatelessWidget {
               SizedBox(height: 30,),
              
               SizedBox(height: 30,),
-           CustomMaterialButton(MaterialButtonText: Strings.signUpText),
+           CustomMaterialButton(onPressed: () {
+             
+           },MaterialButtonText: Strings.signUpText),
               SizedBox(height: 40,),
               Text(Strings.alreadyHaveAnAccountText,style:Styles.popiansSemiBold14)
             ],
