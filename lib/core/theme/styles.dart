@@ -21,5 +21,16 @@ class Styles{
 
   );
   
+  static TextStyle popiansMedium14Gray = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: Colors.grey[700]
+  );
+
+  static TextStyle popiansBold22 = GoogleFonts.poppins(
+    fontSize: 22,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primaryColor
+  );
 
 }
