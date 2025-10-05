@@ -33,4 +33,10 @@ class Styles{
     color: AppColors.primaryColor
   );
 
+  static TextStyle popiansRegular15 = GoogleFonts.poppins(
+    fontSize: 15,
+    fontWeight: FontWeight.w400,
+    color: AppColors.primaryColor
+  );
+
 }
