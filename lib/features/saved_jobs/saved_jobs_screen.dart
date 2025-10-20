@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:job_founder/core/helper/images.dart';
 import 'package:job_founder/core/theme/colors.dart';
 import 'package:job_founder/core/theme/styles.dart';
 import 'package:job_founder/core/widgets/stacked_avatar.dart';
+import 'package:job_founder/features/jobs/job_details_screen.dart';
 class SavedJobsScreen extends StatefulWidget {
   const SavedJobsScreen({super.key});
 
@@ -18,9 +20,10 @@ int selectedIndex=0;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffF4F4FF),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xffF4F4FF),
+        surfaceTintColor: Color(0xffF4F4FF),
        leading: Icon(Icons.arrow_back_ios),
        title: Text('Saved',style: Styles.popiansSemiBold14.copyWith(
         fontSize: 14.sp
@@ -34,7 +37,7 @@ int selectedIndex=0;
        ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal:24.0),
+        padding: const EdgeInsets.only(left:24.0),
         child: Column(
           children: [
             SizedBox(height: 34.h,),
@@ -49,9 +52,9 @@ int selectedIndex=0;
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(filters.length, (index) {
                 return   ChoiceChip(
-                    disabledColor: Colors.white,
+                    disabledColor: Color(0xffF4F4FF),
                     selectedColor: AppColors.primaryColor,
-                    backgroundColor: Colors.white,
+                    backgroundColor: Color(0xffF4F4FF),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(97.r)
                     ),
@@ -69,7 +72,72 @@ int selectedIndex=0;
                                       
                 }),
               ),
-            )
+            ),
+            SizedBox(height: 16.h,),
+            Expanded(child: ListView.builder(
+              itemCount: 3,
+              itemBuilder: (context,index){
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (cotext)=>JobDetailsScreen()));
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  margin: EdgeInsets.only(right: 24,top: 20),
+                  width: 327.w,
+                  height: 140.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5.r)
+                  ),
+                  child:  Column(
+                    children: [
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                      leading: Image.asset(Images.burgerKingImage,width: 45,height: 45,),
+                      title: Text("Product Manager",style: Styles.popiansSemiBold14),
+                                  
+                      subtitle: Text('Burger King',style: Styles.popiansRegular15.copyWith(
+                        fontSize: 13
+                      ),),
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text('\$96,000/Y',style: Styles.popiansSemiBold14.copyWith(fontSize: 12),),
+                          Text('Los Angeles, US',style: Styles.popiansRegular15.copyWith(
+                            fontSize: 11
+                          ),)
+                        ],
+                      ),
+                                    ),
+                                    SizedBox(height: 11.h,),
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 114.w,
+                            height: 33.h,
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(0.2),
+                             borderRadius: BorderRadius.circular(52.r)
+                            ),
+                            child: Center(child: Text('Closed',style: Styles.popiansMedium14Gray.copyWith(
+                              color: Colors.black
+                            ),)
+                            ),
+                          ),
+                          Text('Full-Time',style: Styles.popiansMedium14Gray.copyWith(
+                            color: Colors.black,
+                            fontSize: 12.sp
+                          ),)
+                        ],
+                       )
+                    ],
+                  ),
+                ),
+              );
+            }))
           ],
         ),
       ),
