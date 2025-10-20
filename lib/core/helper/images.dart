@@ -9,4 +9,9 @@ class Images{
    static const String person1Image='assets/images/person1.jpg';
       static const String person2Image='assets/images/person2.jpg';
      static const String person3Image='assets/images/person3.jpg';
+      static const String fiverr='assets/images/fiverr.jpg';
+         static const String mac='assets/images/macdonals.jpg';
+            static const String bmw='assets/images/bmw.jpg';
+               static const String bookly='assets/images/bookly.jpg';
+
 }
