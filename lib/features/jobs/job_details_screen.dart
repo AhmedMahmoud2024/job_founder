@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_founder/core/helper/images.dart';
 import 'package:job_founder/core/theme/styles.dart';
+import 'package:job_founder/features/jobs/apply_job_screen.dart';
 import 'package:job_founder/features/jobs/widgets/descriptions_body.dart';
 
 import '../../core/theme/colors.dart';
@@ -132,10 +133,11 @@ late TabController tabController;
                   )
                 ),
                 onPressed: (){
-          
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>ApplyJobScreen()));        
               }, child: Text('Apply now',style: Styles.medium16.copyWith(
                 color: Colors.white
-              ),))
+              ),)
+              )
             ],
           ),
         ),

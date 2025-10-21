@@ -13,5 +13,7 @@ class Images{
          static const String mac='assets/images/macdonals.jpg';
             static const String bmw='assets/images/bmw.jpg';
                static const String bookly='assets/images/bookly.jpg';
-
+    static const String resumePerson='assets/images/resume_person.jpg';
+ static const String verifyIcon='assets/images/verify.jpg';
+ static const String upladPdf='assets/images/uploadPdf.jpg';
 }
