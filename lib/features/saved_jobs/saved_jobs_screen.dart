@@ -79,7 +79,7 @@ int selectedIndex=0;
               itemBuilder: (context,index){
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (cotext)=>JobDetailsScreen()));
+                  Navigator.of(context,rootNavigator:true).push(MaterialPageRoute(builder: (cotext)=>JobDetailsScreen()));
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 24),
