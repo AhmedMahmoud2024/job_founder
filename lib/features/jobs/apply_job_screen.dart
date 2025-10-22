@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,8 +9,29 @@ import 'package:job_founder/core/theme/colors.dart';
 import 'package:job_founder/core/theme/styles.dart';
 import 'package:job_founder/features/home/home_screen.dart';
 
-class ApplyJobScreen extends StatelessWidget {
+class ApplyJobScreen extends StatefulWidget {
   const ApplyJobScreen({super.key});
+
+  @override
+  State<ApplyJobScreen> createState() => _ApplyJobScreenState();
+}
+
+class _ApplyJobScreenState extends State<ApplyJobScreen> {
+File? uploadPdf;
+Future<void>  uploadResume() async{
+FilePickerResult? result=await FilePicker.platform.pickFiles(
+type: FileType.custom,
+allowedExtensions: ['pdf']
+);
+if(result!=null){
+  setState(() {
+    uploadPdf=File(result.files.single.path!);
+  });
+}
+ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  backgroundColor: Colors.green,
+  content: Text('Files Uploaded Successfully')));
+}
 
   @override
   Widget build(BuildContext context) {
@@ -186,22 +210,33 @@ class ApplyJobScreen extends StatelessWidget {
                     
                   ),
                         ),
-                        Container(
-                          width: 68.w,
-                          height: 90.h,
-                          decoration: BoxDecoration(
-                            color: Colors.white
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(Images.upladPdf,width: 16.w,height: 16.h,),
-                              Text('Upload Resume ',style: Styles.medium16.copyWith(
-                                fontSize: 10.sp
-                              ),
-                              textAlign: TextAlign.center,)
-                            ],
+                        GestureDetector(
+                          onTap: () async{
+                            await uploadResume();
+                          },
+                          child: Container(
+                            width: 68.w,
+                            height: 90.h,
+                            decoration: BoxDecoration(
+                              color: Colors.white
+                            ),
+                            child:uploadPdf!=null?Center(child: Text('File Uploaded',
+                            style: Styles.medium16.copyWith(fontSize: 10.sp,
+                            color: Colors.green),
+                            textAlign: TextAlign.center,
+                            )
+                            ,)
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(Images.upladPdf,width: 16.w,height: 16.h,),
+                                Text('Upload Resume ',style: Styles.medium16.copyWith(
+                                  fontSize: 10.sp
+                                ),
+                                textAlign: TextAlign.center,)
+                              ],
+                            ),
                           ),
                         )
                       ],
