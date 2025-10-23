@@ -129,6 +129,37 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           ),
                         )
                      ,
+                      Container(
+                          width: 155.w,
+                          height: 60.h,
+                          decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16.r)
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.radio_button_off_outlined),
+     
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    width: 65,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.primaryColor,
+                                      borderRadius: BorderRadius.circular(6.r)
+                                    ),
+                                    child: Center(child: Text('Ux Designer',style: Styles.popiansMedium14Gray.copyWith(color: Colors.white,fontSize: 8,fontWeight: FontWeight.w700),)),
+                                  ),
+                                  Text('jennefer catlen',style: Styles.popiansSemiBold14.copyWith(fontSize: 11),)
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                     /*
                      Row(
                       children: [
                         Container(
@@ -161,9 +192,12 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               )
                             ],
                           ),
+                          
                         )
+                        
                       ],
                      ),
+                     */
                     
                       ],
                
@@ -230,7 +264,7 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Image.asset(Images.upladPdf,width: 16.w,height: 16.h,),
+                                Image.asset(Images.uploadPdf,width: 25.w,height: 25.h,),
                                 Text('Upload Resume ',style: Styles.medium16.copyWith(
                                   fontSize: 10.sp
                                 ),
