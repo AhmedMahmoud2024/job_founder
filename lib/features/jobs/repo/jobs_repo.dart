@@ -1,6 +1,6 @@
 import 'package:job_founder/core/network/api_result.dart';
 import 'package:job_founder/core/network/api_services.dart';
-import 'package:job_founder/features/jobs/models/jobs_data_model.dart';
+import 'package:job_founder/features/jobs/data/models/jobs_data_model.dart';
 
 class JobsRepo{
   final ApiServices apiServices;
