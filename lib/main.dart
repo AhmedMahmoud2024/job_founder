@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:job_founder/core/di/dependency_injection.dart';
 
 import 'features/onBoarding/on_boarding_screen.dart';
 
-void main() {
+void main() async{
+await setUpGetIt();
   runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {
