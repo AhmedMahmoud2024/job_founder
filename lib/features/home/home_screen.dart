@@ -212,43 +212,7 @@ class FeaturedJobsRow extends StatelessWidget {
               );
            })
           ,
-           /*          
-              SizedBox(
-                width: 15,
-              ),
-              Container(
-                width: 156,
-                height: 164,
-                decoration: BoxDecoration(
-                    color: AppColors.secondaryColor.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(24)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      Images.spotifyImage,
-                      width: 40,
-                      height: 40,
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    Text('Sr Developer', style: Styles.popiansSemiBold14),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    Text('Spotify',
-                        style: Styles.popiansRegular15.copyWith(fontSize: 12)),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    Text('\$115,000/Y',
-                        style: Styles.popiansMedium14Gray
-                            .copyWith(color: Colors.black)),
-                  ],
-                ),
-              )
-              */
+       
             ],
           ),
         );

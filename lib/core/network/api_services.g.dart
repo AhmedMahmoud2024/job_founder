@@ -14,7 +14,7 @@ class _ApiServices implements ApiServices {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://jobicy.com/api/v2';
+    baseUrl ??= 'https://reqres.in/api/';
   }
 
   final Dio _dio;
@@ -49,6 +49,40 @@ class _ApiServices implements ApiServices {
     late JobsDataModel _value;
     try {
       _value = JobsDataModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<RegisterModel> register(Map<String, dynamic> userData) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(userData);
+    final _options = _setStreamType<RegisterModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/register',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late RegisterModel _value;
+    try {
+      _value = RegisterModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
