@@ -57,10 +57,14 @@ class _ApiServices implements ApiServices {
   }
 
   @override
-  Future<RegisterModel> register(Map<String, dynamic> userData) async {
+  Future<RegisterModel> register(
+    Map<String, dynamic> userData,
+    dynamic String,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'x-api-key': String};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(userData);
     final _options = _setStreamType<RegisterModel>(Options(
@@ -83,6 +87,44 @@ class _ApiServices implements ApiServices {
     late RegisterModel _value;
     try {
       _value = RegisterModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<LoginModel> login(
+    Map<String, dynamic> userData,
+    dynamic String,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'x-api-key': String};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(userData);
+    final _options = _setStreamType<LoginModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/login',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LoginModel _value;
+    try {
+      _value = LoginModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
