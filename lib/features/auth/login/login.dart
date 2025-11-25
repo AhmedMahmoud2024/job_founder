@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:job_founder/features/auth/login/logic/cubit/login_cubit.dart';
+import 'package:job_founder/features/auth/login/logic/cubit/login_state.dart';
 import 'package:job_founder/features/auth/register/logic/cubit/register_cubit.dart';
 
 import '../../../core/di/dependency_injection.dart';
@@ -8,13 +10,15 @@ import '../../../core/helper/strings.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/styles.dart';
 import '../../bottom_nav_bar_screen.dart';
+import '../register/logic/cubit/register_state.dart' hide Loading;
 import '../register/register.dart';
 import 'widgets/custom_material_button.dart';
 import 'widgets/custom_text_field.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-
+   LoginPage({super.key});
+  final TextEditingController email=TextEditingController();
+ final TextEditingController password=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,14 +60,45 @@ class LoginPage extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                CustomMaterialButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BottomNavBarScreen()));
-                    },
-                    MaterialButtonText: Strings.signInText),
+                BlocConsumer<LoginCubit, LoginState>(
+                  listener: (context, state) {
+                    state.whenOrNull(
+                      success: (data) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Login Successful!'),
+                            backgroundColor: Colors.green,
+                          ),
+                        
+                        );
+                           Navigator.push(context, MaterialPageRoute(builder: (_)=>BottomNavBarScreen()));
+                      },
+                      fail: (error) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(error),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  builder: (context, state) {
+                    final cubit= context.read<LoginCubit>();
+                   if (state is Loading) {
+                      return CircularProgressIndicator();
+                    }
+                    return CustomMaterialButton(
+                        onPressed: ()async {
+                            await cubit.login(email: email.text, password: password.text);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BottomNavBarScreen()));
+                        },
+                        MaterialButtonText: Strings.signInText);
+                  },
+                ),
                 SizedBox(
                   height: 40,
                 ),
