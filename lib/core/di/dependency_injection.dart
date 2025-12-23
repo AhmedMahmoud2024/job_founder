@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:job_founder/core/network/api_services.dart';
+import 'package:job_founder/features/auth/login/logic/cubit/login_cubit.dart';
+import 'package:job_founder/features/auth/login/repo/login_repo.dart';
 import 'package:job_founder/features/auth/register/data/repo/register_repo.dart';
 import 'package:job_founder/features/jobs/logic/cubit/jobs_cubit.dart';
 import 'package:job_founder/features/jobs/repo/jobs_repo.dart';
@@ -15,4 +17,7 @@ Future<void> setUpGetIt()async{
      getIt.registerFactory<JobsCubit>(() =>JobsCubit(getIt()));
       getIt.registerLazySingleton<RegisterRepo>(() =>RegisterRepo(apiServices: getIt()));
      getIt.registerFactory<RegisterCubit>(() =>RegisterCubit(getIt()));
+       getIt.registerLazySingleton<LoginRepo>(() =>LoginRepo(apiServices: getIt()));
+     getIt.registerFactory<LoginCubit>(() =>LoginCubit(getIt()));
+
 }

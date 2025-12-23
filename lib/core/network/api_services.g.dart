@@ -59,11 +59,12 @@ class _ApiServices implements ApiServices {
   @override
   Future<RegisterModel> register(
     Map<String, dynamic> userData,
-    dynamic String,
+    String? apiKey,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'x-api-key': String};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'x-api-key': apiKey};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(userData);
@@ -97,11 +98,12 @@ class _ApiServices implements ApiServices {
   @override
   Future<LoginModel> login(
     Map<String, dynamic> userData,
-    dynamic String,
+    String? apiKey,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'x-api-key': String};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'x-api-key': apiKey};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(userData);

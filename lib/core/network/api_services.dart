@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'package:dio/dio.dart';
 import 'package:job_founder/core/network/api_constants.dart';
 import 'package:retrofit/retrofit.dart';
@@ -13,13 +14,16 @@ factory  ApiServices(Dio dio)=_ApiServices;
 @GET(ApiConstants.jobsLink)
  Future<JobsDataModel> getJobs();
 
-@POST(ApiConstants.registerLink)
- Future<RegisterModel> register(@Body() Map<String,dynamic> userData,@Header("x-api-key") String);
- 
+  @POST('/register')
+  Future<RegisterModel> register(
+    @Body() Map<String, dynamic> userData,
+    @Header('x-api-key') String? apiKey,
+  );
 
-@POST(ApiConstants.loginLink)
- Future<LoginModel> login(@Body() Map<String,dynamic> userData,@Header("x-api-key") String);
-
-
+  @POST('/login')
+  Future<LoginModel> login(
+    @Body() Map<String, dynamic> userData,
+    @Header('x-api-key') String? apiKey,
+  );
 }
 

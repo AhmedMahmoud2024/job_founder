@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:job_founder/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:job_founder/features/auth/login/login.dart';
 import 'package:job_founder/features/auth/login/widgets/custom_material_button.dart';
 import 'package:job_founder/features/auth/register/logic/cubit/register_cubit.dart';
 
+import '../../../core/di/dependency_injection.dart';
 import '../../../core/helper/strings.dart';
 import '../../../core/theme/styles.dart';
 import '../login/widgets/custom_text_field.dart';
@@ -64,7 +66,14 @@ final TextEditingController passwordController=TextEditingController();
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: Colors.green,
                           content: Text('Account Created Successfully')));
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>LoginPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=>
+                        BlocProvider(
+                        create: (context) => getIt<LoginCubit>(),
+                        child: LoginPage(),
+                      )
+                      )
+                      )
+                      ;
                       }
                     );
                       fail: (error) {
