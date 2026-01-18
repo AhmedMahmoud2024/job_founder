@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_founder/core/helper/images.dart';
 import 'package:job_founder/core/theme/colors.dart';
 import 'package:job_founder/core/theme/styles.dart';
+import 'package:job_founder/features/apply%20success/apply_scucess.dart';
 import 'package:job_founder/features/home/home_screen.dart';
 
 class ApplyJobScreen extends StatefulWidget {
@@ -286,8 +287,8 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       )
                     ),
                     onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ApplyJobScreen()));        
-                  }, child: Text('Apply now',style: Styles.medium16.copyWith(
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ApplySuccess()));        
+                  }, child: Text('Apply ',style: Styles.medium16.copyWith(
                     color: Colors.white
                   ),)
                   ),

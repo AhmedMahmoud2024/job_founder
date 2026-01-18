@@ -63,25 +63,32 @@ final TextEditingController passwordController=TextEditingController();
                   listener: (context, state) {
                     state.whenOrNull(
                       success: (data) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Colors.green,
-                          content: Text('Account Created Successfully')));
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>
-                        BlocProvider(
-                        create: (context) => getIt<LoginCubit>(),
-                        child: LoginPage(),
-                      )
-                      )
-                      )
-                      ;
-                      }
-                    );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.green,
+                            content: Text('Account Created Successfully'),
+                          ),
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => BlocProvider(
+                              create: (context) => getIt<LoginCubit>(),
+                              child: LoginPage(),
+                            ),
+                          ),
+                        );
+                      },
                       fail: (error) {
                         print(error);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: Colors.red,
-                          content: Text('Error: $error')));
-                      };
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text('Error: $error'),
+                          ),
+                        );
+                      },
+                    );
                   },
                   builder: (context, state) {
                     final cubit= context.read<RegisterCubit>();
@@ -91,7 +98,6 @@ final TextEditingController passwordController=TextEditingController();
                     return CustomMaterialButton(
                         onPressed: () async{
                            await cubit.register(email: emailController.text, password: passwordController.text);
-
                         },
                         MaterialButtonText: Strings.signUpText);
                   },
