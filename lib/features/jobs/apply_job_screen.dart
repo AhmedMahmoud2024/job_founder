@@ -64,17 +64,19 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         children: [
           Container( //first row element conntainer
             width: 155.w,
+          //  height: 155.h, //
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12.r)
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(       
+              child: Column( 
+                      
                 children: [
                   Align(
                     heightFactor: 0.4,
-                    alignment: Alignment.topCenter,
+                    alignment: Alignment.topRight,
                     child: Icon(Icons.radio_button_off_outlined,color: Colors.grey.shade300,),
                   ),
                   SizedBox(height: 5.h,),
@@ -90,14 +92,51 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                          Image.asset(Images.verifyIcon,width: 9.w,height: 9.h,)
                        ],
                      ),
+                ],
+              ),
+            ),
+          ),
+ 
+           Container( //first row element conntainer
+            width: 155.w,
+          //  height: 155.h, //
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12.r)
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column( 
+                      
+                children: [
+                  Align(
+                    heightFactor: 0.4,
+                    alignment: Alignment.topRight,
+                    child: Icon(Icons.check_circle_outline_outlined,color: Colors.grey.shade300,),
+                  ),
+                  SizedBox(height: 5.h,),
+                  Image.asset(Images.resumePerson,width: 72.w,height: 72.h,),
+                    SizedBox(height: 5.h,),
+                  Text('jennefer catlen',style: Styles.popiansSemiBold14.copyWith(fontSize: 15.sp),),
+                     SizedBox(height: 5.h,),
+                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         Text('Product Manager',style: Styles.popiansRegular15.copyWith(fontSize: 10.sp),),
+                         SizedBox(width: 5.h,),
+                         Image.asset(Images.verifyIcon,width: 9.w,height: 9.h,)
+                       ],
+                     ),
          
-                
-                   
-       
-                     Padding(padding: const EdgeInsets.only(left: 24.0,top: 32,bottom: 29),
+        ],)
+      )
+     )]
+     ),
+      Padding(padding: const EdgeInsets.only(left: 24.0,top: 32,bottom: 29),
                      child: Text('Select a resume',style: Styles.popiansSemiBold14.copyWith(fontSize: 16),),
                      ),
-                     Row(
+
+                         Row(
                       children: [
                         Container(
                           width: 155.w,
@@ -128,40 +167,8 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               )
                             ],
                           ),
-                        )
-                     ,
-                      Container(
-                          width: 155.w,
-                          height: 60.h,
-                          decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16.r)
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.radio_button_off_outlined),
-     
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Container(
-                                    width: 65,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.primaryColor,
-                                      borderRadius: BorderRadius.circular(6.r)
-                                    ),
-                                    child: Center(child: Text('Ux Designer',style: Styles.popiansMedium14Gray.copyWith(color: Colors.white,fontSize: 8,fontWeight: FontWeight.w700),)),
-                                  ),
-                                  Text('jennefer catlen',style: Styles.popiansSemiBold14.copyWith(fontSize: 11),)
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                     /*
-                     Row(
+                        ),
+                            Row(
                       children: [
                         Container(
                           width: 155.w,
@@ -179,37 +186,28 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(3),
-                                    height: 20,
+                                    width: 71,
+                                    height: 25,
                                     decoration: BoxDecoration(
-                                      color: AppColors.primaryColor,
+                                      color: Colors.red,
                                       borderRadius: BorderRadius.circular(6.r)
                                     ),
-                                    child: Center(child: Text('Product Manager',style: Styles.popiansMedium14Gray.copyWith(color: Colors.red,
-                                    fontSize: 8,fontWeight: FontWeight.w700),)),
+                                    child: Center(child: Text('Product Designer',style: Styles.popiansMedium14Gray.copyWith(color: Colors.white,fontSize: 8,fontWeight: FontWeight.w700),)),
                                   ),
                                   Text('jennefer catlen',style: Styles.popiansSemiBold14.copyWith(fontSize: 11),)
                                 ],
                               )
                             ],
                           ),
-                          
                         )
-                        
-                      ],
-                     ),
-                     */
-                    
-                      ],
-               
-                     )
-               ,
-                   
-                     Padding(padding: const EdgeInsets.only(left: 24.0,top: 40,bottom: 16),
+                        ]
+                        ),
+                        ]
+                        ),
+                         Padding(padding: const EdgeInsets.only(left: 24.0,top: 40,bottom: 16),
                      child: Text('Cover Later (Optional)', style: Styles.popiansSemiBold14.copyWith(fontSize: 16.sp),),
                      ),
-     
-                     Row(
+                       Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SizedBox(
@@ -251,7 +249,7 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           },
                           child: Container(
                             width: 68.w,
-                            height: 90.h,
+                          //  height: 90.h,
                             decoration: BoxDecoration(
                               color: Colors.white
                             ),
@@ -275,8 +273,8 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           ),
                         )
                       ],
-                     ),
-                     SizedBox(height: 32.h,),
+                     ),   
+                        SizedBox(height: 32.h,),
                 Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -293,50 +291,11 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   ),)
                   ),
                 ),
-                SizedBox(height: 32.h,)
-                ],
-              ),
-            ),
-          ),
-       
-       SizedBox(width: 10.w,),
-           Container(
-            width: 155.w,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12.r)
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(       
-                children: [
-                  Align(
-                    heightFactor: 0.4,
-                    alignment: Alignment.topCenter,
-                    child: Icon(Icons.check_circle,color: Colors.grey.shade300,),
-                  ),
-                  SizedBox(height: 5.h,),
-                  Image.asset(Images.resumePerson,width: 72.w,height: 72.h,),
-                    SizedBox(height: 5.h,),
-                  Text('jennefer catlen',style: Styles.popiansSemiBold14.copyWith(fontSize: 15.sp),),
-                     SizedBox(height: 5.h,),
-                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Text('Product Manager',style: Styles.popiansRegular15.copyWith(fontSize: 10.sp),),
-                         SizedBox(width: 5.h,),
-                         Image.asset(Images.verifyIcon,width: 9.w,height: 9.h,)
-                       ],
-      
-                     ),
-                ],
-              ),
-            ),
-          )
-        ],
-      )
-      ],
+     ]
+     
      ),
+ 
+
    ),
     );
   }
