@@ -6,6 +6,7 @@ import 'package:job_founder/core/theme/colors.dart';
 import 'package:job_founder/features/jobs/logic/cubit/jobs_cubit.dart';
 import 'package:job_founder/features/jobs/logic/cubit/jobs_state.dart';
 
+import '../../core/helper/lists.dart';
 import '../../core/theme/styles.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,17 +18,24 @@ class HomeScreen extends StatelessWidget {
       drawer: Drawer(
         backgroundColor: Colors.white,
         width: 330.w,
-        child: Column(children: [
-          DrowerHeaderOfHome(),
-          ListView.builder(
-            itemCount: 8,
-            itemBuilder: (context,index){
-              return ListTile(
-
-              );
-            }
+        child: SingleChildScrollView(
+          child: Column(children: [
+            DrowerHeaderOfHome(),
+            SizedBox(
+              height: 500.h,
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: AppLists.titleDrawer.length,
+                itemBuilder: (context,index){
+                  return ListTile(
+               title: Text(AppLists.titleDrawer[index],style: Styles.popiansMedium14Gray,),
+               leading: Image.asset(AppLists.leadingDrawer[index],width: 16.w,height: 21.h,),
+                  );
+                }
+                ),
             )
-        ]),
+          ]),
+        ),
       ),
         backgroundColor: Colors.white.withOpacity(0.09),
         body: SafeArea(
