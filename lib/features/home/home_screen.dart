@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_founder/core/helper/images.dart';
 import 'package:job_founder/core/theme/colors.dart';
 import 'package:job_founder/features/jobs/logic/cubit/jobs_cubit.dart';
@@ -13,6 +14,21 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        backgroundColor: Colors.white,
+        width: 330.w,
+        child: Column(children: [
+          DrowerHeaderOfHome(),
+          ListView.builder(
+            itemCount: 8,
+            itemBuilder: (context,index){
+              return ListTile(
+
+              );
+            }
+            )
+        ]),
+      ),
         backgroundColor: Colors.white.withOpacity(0.09),
         body: SafeArea(
           child: Padding(
@@ -51,6 +67,46 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+class DrowerHeaderOfHome extends StatelessWidget {
+  const DrowerHeaderOfHome({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DrawerHeader(
+      margin: EdgeInsets.zero,
+      padding: EdgeInsets.zero,
+      child:SingleChildScrollView(
+        child: Column(
+        children: [
+          Align(
+            heightFactor:0.3,
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: Icon(Icons.close),
+            ),
+          ),
+          Image.asset(Images.resumePerson,width: 104.w,height: 104.h,),
+          Text("Haley Jessica",style: Styles.popiansSemiBold14,),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   Text('Ux Designer',style: Styles.popiansRegular15.copyWith(fontSize: 10.sp),),
+                   SizedBox(width: 5.h,),
+                   Image.asset(Images.verifyIcon,width: 9.w,height: 9.h,)
+                 ],
+               ),
+               Text('View Profile',style: Styles.popiansMedium14Gray.copyWith(
+                fontWeight: FontWeight.w600
+               ),)
+        ],
+                  ),
+      ));
+  }
+}
+
 class WelcomeHeader extends StatelessWidget {
   const WelcomeHeader({
     super.key,
@@ -65,23 +121,28 @@ class WelcomeHeader extends StatelessWidget {
             style:
                 Styles.popiansBold22.copyWith(color: AppColors.primaryColor)),
       ]),
-      Stack(
-        children: [
-          CircleAvatar(
-            radius: 30,
-            child: Image.asset(Images.personImage),
-          ),
-          Positioned(
-            right: 0,
-            child: CircleAvatar(
-              radius: 10,
+      GestureDetector(
+        onTap: () {
+          Scaffold.of(context).openDrawer();
+        },
+        child: Stack(
+          children: [
+            CircleAvatar(
+              radius: 30,
+              child: Image.asset(Images.personImage),
+            ),
+            Positioned(
+              right: 0,
               child: CircleAvatar(
-                radius: 5,
-                backgroundColor: Colors.red,
+                radius: 10,
+                child: CircleAvatar(
+                  radius: 5,
+                  backgroundColor: Colors.red,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       )
     ]);
   }

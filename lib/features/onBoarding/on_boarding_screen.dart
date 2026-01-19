@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_founder/core/helper/strings.dart';
 import 'package:job_founder/core/theme/colors.dart';
 
@@ -18,7 +19,7 @@ class OnBoardingScreen extends StatelessWidget {
       appBar: const PreferredSize(child: OnBoardingAppBar(), preferredSize: Size.fromHeight(60)),
       body: Padding(padding: const EdgeInsets.symmetric(horizontal: 20),child: SingleChildScrollView(
         child: Column(children: [
-          Image.asset(Images.onBoardingImage),
+          Image.asset(Images.onBoardingImage,width: 300.w,height: 317.h),
           const SizedBox(height: 20,),
           
            OnBoardingTitle(),
