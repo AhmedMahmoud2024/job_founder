@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt:true,  //make text take minimum size 
       splitScreenMode:true, //in case of two app on same screen
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           dividerTheme: const DividerThemeData(
             color: Colors.transparent,

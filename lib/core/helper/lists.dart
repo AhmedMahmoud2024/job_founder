@@ -8,7 +8,7 @@ class AppLists{
     "proposal",
     "Settings",
     "Resumes",
-    "Logout",
+    "Resumes",
   ];
 
   static List<String>leadingDrawer=[

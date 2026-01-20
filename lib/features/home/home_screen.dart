@@ -5,6 +5,7 @@ import 'package:job_founder/core/helper/images.dart';
 import 'package:job_founder/core/theme/colors.dart';
 import 'package:job_founder/features/jobs/logic/cubit/jobs_cubit.dart';
 import 'package:job_founder/features/jobs/logic/cubit/jobs_state.dart';
+import 'package:job_founder/features/profile%20style/profile_style.dart';
 
 import '../../core/helper/lists.dart';
 import '../../core/theme/styles.dart';
@@ -96,7 +97,7 @@ class DrowerHeaderOfHome extends StatelessWidget {
               child: Icon(Icons.close),
             ),
           ),
-          Image.asset(Images.resumePerson,width: 104.w,height: 104.h,),
+          Image.asset(Images.resumePerson1,width: 104.w,height: 104.h,),
           Text("Haley Jessica",style: Styles.popiansSemiBold14,),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -106,9 +107,14 @@ class DrowerHeaderOfHome extends StatelessWidget {
                    Image.asset(Images.verifyIcon,width: 9.w,height: 9.h,)
                  ],
                ),
-               Text('View Profile',style: Styles.popiansMedium14Gray.copyWith(
-                fontWeight: FontWeight.w600
-               ),)
+               GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileStyle()));
+                },
+                 child: Text('View Profile',style: Styles.popiansMedium14Gray.copyWith(
+                  fontWeight: FontWeight.w600
+                 ),),
+               )
         ],
                   ),
       ));
