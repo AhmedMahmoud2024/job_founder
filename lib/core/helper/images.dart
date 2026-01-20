@@ -18,4 +18,11 @@ class Images{
  static const String verifyIcon='assets/images/verify.jpg';
  static const String uploadPdf='assets/images/uploadPdf.png';
  static const String done='assets/images/done.png';
+  static const String image18='assets/images/image 18.png';
+   static const String image13='assets/images/image 13.png';
+    static const String image14='assets/images/image 14.png';
+     static const String image15='assets/images/image 15.png';
+      static const String image16='assets/images/image 16.png';
+       static const String image17='assets/images/image 17.png';
+       
 }
