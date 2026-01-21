@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:job_founder/features/resume%20portfolio%20uploaded/widgets/resume_portfolio_uploaded.dart';
 
 import '../../core/helper/images.dart';
 import '../../core/theme/styles.dart';
@@ -94,11 +95,16 @@ class ProfileStyle extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF1F41BB)
                       ),),
-                      Text('Make a resume',style: Styles.popiansRegular15.copyWith(
-                        fontSize: 13.sp,
-                            fontWeight: FontWeight.w400,
-                        color: Color(0xFF1F41BB)
-                      ),),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ResumePortfolioUploaded()));
+                        },
+                        child: Text('Make a resume',style: Styles.popiansRegular15.copyWith(
+                          fontSize: 13.sp,
+                              fontWeight: FontWeight.w400,
+                          color: Color(0xFF1F41BB)
+                        ),),
+                      ),
                     ],
                   ),
                   SizedBox(height: 13.h,),

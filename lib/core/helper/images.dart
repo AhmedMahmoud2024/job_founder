@@ -17,6 +17,7 @@ class Images{
      static const String resumePerson1='assets/images/resume_person1.png';
  static const String verifyIcon='assets/images/verify.jpg';
  static const String uploadPdf='assets/images/uploadPdf.png';
+  static const String pdfImage='assets/images/pdfImage.png';
  static const String done='assets/images/done.png';
   static const String image18='assets/images/image 18.png';
    static const String image13='assets/images/image 13.png';
