@@ -88,142 +88,234 @@ class ResumePortfolioUploaded extends StatelessWidget {
           )
         ],
       ),
-      body:  SingleChildScrollView(
-        child: Column(
+      body:  ListView(
         children: [
-          Container(
-            width: 327.w,
-            height: 360.h,
-            padding: EdgeInsets.only(top:122.h,left: 24.w),
+          Column(
+          children: [
+            Container(
+              width: 327.w,
+              height: 360.h,
+              padding: EdgeInsets.only(top:8.h,left: 24.w),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              child:Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15.0),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      
+                      child: Text('Resume or CV',style: Styles.popiansSemiBold14.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600
+                      ),
+                      
+                      ),
+                    ),
+                  ),
+              
+              Container(
+            width: 340.w,
+            height: 300.h,
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(8.r),
             ),
-            child:Column(
-              children: [
-                Text('Resume or CV',style: Styles.popiansSemiBold14.copyWith(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600
-                ),),
-    
-    Container(
-  width: 350.w,
-  height: 315.h,
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(8.r),
-  ),
-  child: CustomPaint(
-    painter: DashedBorderPainter(),
-    child: Container(
-      width: 350.w,
-      height: 315.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.r),
-        color: Colors.white,
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 35.0),
-            child: Container(
-              width: 210.w,
-              height: 42.h,
-            
-              child: Center(child: Text('Upload your CV or Resume and \n use it when you apply for jobs'))),
-          ),
-             
+            child: CustomPaint(
+              painter: DashedBorderPainter(),
+              child: Container(
+                width: 340.w,
+                height: 300.h,
+                decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.r),
+          color: Colors.white,
+                ),
+                child: Column(
+          children: [
             Padding(
-            padding:  EdgeInsets.only(top: 30.0,left: 20.0,bottom: 10.0),
+              padding: const EdgeInsets.only(top: 25.0),
+              child: Container(
+                width: 210.w,
+                height: 42.h,
+              
+                child: Center(child: Text('Upload your CV or Resume and \n use it when you apply for jobs'))),
+            ),
+               
+              Padding(
+              padding:  EdgeInsets.only(top: 20.0,left: 20.0,bottom: 10.0),
+              child: Container(
+                width: 210.w,
+                height: 70.h,
+               decoration: BoxDecoration(
+                color: Color(0xFFF2F2F3)
+               ),
+                child: Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                 children: [
+                  Container(
+                    width: 33.w,
+                    height: 41.h,
+                    padding: EdgeInsets.only(top: 16.h,left: 24.h),
+                    child:Image.asset('assets/images/pdfImage.png')), 
+                   Column(
+                    children: [
+                      
+                        Text('Rifat_CV_UX Designer',
+                        style: Styles.popiansMedium14Gray.copyWith(
+                          fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                          color: Color(0xFF0D0D26)
+                        )
+                        ),
+                        SizedBox(height: 8.h,),
+                         Text('287 KB',
+                        style: Styles.popiansRegular15.copyWith(
+                          fontSize: 11.sp,
+                              fontWeight: FontWeight.w400,
+                          color: Color(0xFF95969D)
+                        )
+                        ),
+                    ],
+          
+                   ),
+          
+                 ],
+          
+                 
+                )
+              ),
+            ),
+           
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Container(
+                width: 184.w,
+                height: 56.h,
+               
+                decoration: BoxDecoration(
+                  color: Color(0xFF1F41BB),
+                  borderRadius: BorderRadius.circular(5.r)
+                ),
+                   
+               child: Center(
+                 child: Text('Add More',
+                 style: Styles.popiansMedium14Gray.copyWith(
+                  fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                  color: Color(0xFFFFFFFF)
+                 ),
+                           ),
+               ),
+              ),
+            ) 
+          ],
+          
+          
+                ),
+              ),
+            ),
+          )
+          
+            /*
+                               DashedRect(
+            color: Color(0xFF1F41BB),
+            strokeWidth: 2,
             child: Container(
-              width: 210.w,
-              height: 70.h,
-             decoration: BoxDecoration(
-              color: Color(0xFFF2F2F3)
-             ),
-              child: Row(
-               mainAxisAlignment: MainAxisAlignment.spaceAround,
-               children: [
-                Container(
-                  width: 33.w,
-                  height: 41.h,
-                  padding: EdgeInsets.only(top: 16.h,left: 24.h),
-                  child:Image.asset('assets/images/pdfImage.png')), 
-                 Column(
+              width: 327.w,
+              height: 315.h,
+              child: Center(child: Text('Dashed Border')),
+            ),
+          )
+          */
+                ],
+              ) ,
+            )
+          ,Padding(
+          
+            padding: const EdgeInsets.only(left: 24,top:15,right: 20),
+            child: Container(
+            width: 327.w,
+            height: 144.h,
+            decoration: BoxDecoration(
+              color: Colors.white
+            ),
+            child: ListView(
+              children: [
+                Column(
                   children: [
-                    
-                      Text('Rifat_CV_UX Designer',
-                      style: Styles.popiansMedium14Gray.copyWith(
-                        fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                        color: Color(0xFF0D0D26)
-                      )
+                     Align(
+                      alignment: Alignment.topLeft,
+                       child: Padding(padding:  EdgeInsets.only(top: 5,bottom: 10),
+                             child: Text('Portfolio (Optional)', style: Styles.popiansSemiBold14.copyWith(fontSize: 16.sp),),
+                             ),
+                     ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          portfolioItem('Portfolio Link'),
+                          SizedBox(width: 15,),
+                          portfolioItem( 'Add Slide' )
+                        ],
                       ),
                       SizedBox(height: 8.h,),
-                       Text('287 KB',
-                      style: Styles.popiansRegular15.copyWith(
-                        fontSize: 11.sp,
-                            fontWeight: FontWeight.w400,
-                        color: Color(0xFF95969D)
-                      )
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          portfolioItem('Add PDF'),
+                          
+                          SizedBox(width: 15,),
+                          portfolioItem( 'Add Photos ' )
+                        ],
                       ),
                   ],
-
-                 ),
-
-               ],
-
-               
-              )
+                ),
+              ],
             ),
-          ),
-         
-          Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: Container(
-              width: 184.w,
+            ),
+          )
+           ,Padding(
+             padding: const EdgeInsets.only(top: 10.0,right: 48,bottom: 5,left: 48),
+             child: Container(
+              width: 327.w,
               height: 56.h,
-             
               decoration: BoxDecoration(
                 color: Color(0xFF1F41BB),
                 borderRadius: BorderRadius.circular(5.r)
               ),
-                 
-             child: Center(
-               child: Text('Add More',
-               style: Styles.popiansMedium14Gray.copyWith(
-                fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                color: Color(0xFFFFFFFF)
-               ),
-                         ),
+              child: Center(
+                child: Text('Save',style: Styles.popiansMedium14Gray.copyWith(
+                  color: Colors.white,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500
+                ),),
+              ),
              ),
-            ),
-          ) 
+           )
+          ],
+          ),
         ],
-
-        
-      ),
-    ),
-  ),
-)
-
-  /*
-                             DashedRect(
-  color: Color(0xFF1F41BB),
-  strokeWidth: 2,
-  child: Container(
-    width: 327.w,
-    height: 315.h,
-    child: Center(child: Text('Dashed Border')),
-  ),
-)
-*/
-              ],
-            ) ,
-          )
-        ],
-        ),
       ),
     );
   }
+}
+
+Widget portfolioItem(String title){
+return Container(
+   width: 155.w,
+   height: 44.h,
+   decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10.r),
+    color:Colors.white, 
+ border: BoxBorder.all(
+  color: Colors.black
+ )
+   ),
+   
+   child: Center(
+    child: Text(
+      title
+    ),
+   ),
+);
 }
