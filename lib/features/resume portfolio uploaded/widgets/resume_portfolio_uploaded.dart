@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dashed_rect/dashed_rect.dart';
+import 'package:job_founder/features/settings/settings.dart';
 
 import '../../../core/theme/styles.dart';
 
@@ -283,12 +284,17 @@ class ResumePortfolioUploaded extends StatelessWidget {
                 color: Color(0xFF1F41BB),
                 borderRadius: BorderRadius.circular(5.r)
               ),
-              child: Center(
-                child: Text('Save',style: Styles.popiansMedium14Gray.copyWith(
-                  color: Colors.white,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500
-                ),),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));
+                },
+                child: Center(
+                  child: Text('Save',style: Styles.popiansMedium14Gray.copyWith(
+                    color: Colors.white,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500
+                  ),),
+                ),
               ),
              ),
            )

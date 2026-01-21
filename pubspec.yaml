@@ -47,7 +47,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   get_it: ^8.2.0
   dashed_border: ^1.0.2
-  dashed_rect: ^0.0.4
+  dashed_rect:
 dev_dependencies: 
   retrofit_generator: ^8.2.1
   freezed: ^2.5.2
