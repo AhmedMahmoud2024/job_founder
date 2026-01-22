@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_founder/core/helper/lists.dart';
 import 'package:job_founder/core/theme/styles.dart';
+import 'package:job_founder/features/search/search.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -36,10 +37,15 @@ class Settings extends StatelessWidget {
             alignment: AlignmentGeometry.bottomLeft,
             child: Padding(
               padding: const EdgeInsets.only(left: 15.0),
-              child: Text('Applications',style: Styles.popiansSemiBold14.copyWith(
-                fontSize: 14,
-                fontWeight: FontWeight.w600
-              ),),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchScreen()));
+                },
+                child: Text('Applications',style: Styles.popiansSemiBold14.copyWith(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600
+                ),),
+              ),
             ),
           ),
         ),
