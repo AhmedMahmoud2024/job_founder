@@ -23,19 +23,24 @@ class Settings extends StatelessWidget {
         ),),
     ),
     body: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           width: 89.w,
-          height: 18.h,
+          height: 25.h,
           decoration: BoxDecoration(
             color:Colors.white
           ),
           child: Align(
-            alignment: AlignmentGeometry.topLeft,
-            child: Text('Applications',style: Styles.popiansSemiBold14.copyWith(
-              fontSize: 14,
-              fontWeight: FontWeight.w600
-            ),),
+            
+            alignment: AlignmentGeometry.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Text('Applications',style: Styles.popiansSemiBold14.copyWith(
+                fontSize: 14,
+                fontWeight: FontWeight.w600
+              ),),
+            ),
           ),
         ),
         SizedBox(height: 15.h,),
@@ -62,12 +67,15 @@ class Settings extends StatelessWidget {
           ),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              'About',style: Styles.popiansSemiBold14.copyWith(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              
-            ),),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Text(
+                'About',style: Styles.popiansSemiBold14.copyWith(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                
+              ),),
+            ),
           ),
         ),
         SizedBox(

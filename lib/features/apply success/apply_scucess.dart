@@ -13,7 +13,7 @@ class ApplySuccess extends StatelessWidget {
    backgroundColor: Colors.white,
    body: SingleChildScrollView(
      child: Padding(
-       padding:  EdgeInsets.only(top:135,left:61,right: 61),
+       padding:  EdgeInsets.only(left:61,right: 61),
        child: Column(
         children: [
           Container(
@@ -35,10 +35,10 @@ class ApplySuccess extends StatelessWidget {
             ),
               textAlign: TextAlign.center,
           ),
-          SizedBox(height: 16.h,),
+          SizedBox(height: 25.h,),
           Container(
           width: 269.sp,
-          height: 55.h,
+          height: 66.h,
           padding: EdgeInsets.only(left:47.w),
           child: Text(
             'You’ve successfully applied to Spotify UX Intern role.',
@@ -49,7 +49,7 @@ class ApplySuccess extends StatelessWidget {
             ),
           ),
           ),
-         SizedBox(height: 44.h,),
+         SizedBox(height: 60.h,),
           Padding(
             padding: const EdgeInsets.only(left: 24.0,),
             child: Container(
@@ -60,11 +60,14 @@ class ApplySuccess extends StatelessWidget {
                 minWidth: 327.w,
                 height: 56.h,
                 shape: RoundedRectangleBorder(
-                 
+                  side: BorderSide(
+                    color: Color(0xFF1F41BB),
+                    width: 1.w,
+                  ),
                   borderRadius: BorderRadius.circular(5)
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(top:10.0,right: 48,bottom: 16,left: 48),
+                  padding: const EdgeInsets.only(right: 48,bottom: 5,left: 48),
                   child: Text(
                     'Browse Jobs',
                     style: Styles.popiansSemiBold14.copyWith(

@@ -6,6 +6,7 @@ import 'package:job_founder/core/theme/colors.dart';
 import 'package:job_founder/features/jobs/logic/cubit/jobs_cubit.dart';
 import 'package:job_founder/features/jobs/logic/cubit/jobs_state.dart';
 import 'package:job_founder/features/profile%20style/profile_style.dart';
+import 'package:job_founder/features/search/search.dart';
 
 import '../../core/helper/lists.dart';
 import '../../core/theme/styles.dart';
@@ -22,18 +23,25 @@ class HomeScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(children: [
             DrowerHeaderOfHome(),
-            SizedBox(
-              height: 500.h,
-              child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: AppLists.titleDrawer.length,
-                itemBuilder: (context,index){
-                  return ListTile(
-               title: Text(AppLists.titleDrawer[index],style: Styles.popiansMedium14Gray,),
-               leading: Image.asset(AppLists.leadingDrawer[index],width: 16.w,height: 21.h,),
-                  );
-                }
-                ),
+       //
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchScreen()));
+              },
+              //
+              child: SizedBox(
+                height: 500.h,
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: AppLists.titleDrawer.length,
+                  itemBuilder: (context,index){
+                    return ListTile(
+                 title: Text(AppLists.titleDrawer[index],style: Styles.popiansMedium14Gray,),
+                 leading: Image.asset(AppLists.leadingDrawer[index],width: 16.w,height: 21.h,),
+                    );
+                  }
+                  ),
+              ),
             )
           ]),
         ),
