@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLID Principles & BLoC/Cubit State Management - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #fff;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media print {
+            body { padding: 20px; }
+            .page-break { page-break-after: always; }
+            h1 { page-break-after: avoid; }
+        }
+
+        /* Typography */
+        h1 {
+            color: #1F41BB;
+            font-size: 2.5em;
+            margin: 40px 0 20px 0;
+            border-bottom: 3px solid #1F41BB;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #1F41BB;
+            font-size: 1.8em;
+            margin: 30px 0 15px 0;
+            border-left: 5px solid #1F41BB;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #2E5090;
+            font-size: 1.3em;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        /* Code blocks */
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1F41BB;
+            padding: 15px;
+            margin: 20px 0;
+            overflow-x: auto;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        thead {
+            background-color: #1F41BB;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Boxes */
+        .highlight-box {
+            background-color: #e8f4f8;
+            border-left: 5px solid #51cf66;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ff6b6b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .info-box {
+            background-color: #e0aaff;
+            border-left: 5px solid #1F41BB;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        /* Diagram section */
+        .diagram-section {
+            background-color: #f9f9f9;
+            border: 2px dashed #1F41BB;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        .diagram-title {
+            font-weight: bold;
+            color: #1F41BB;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        /* Benefits list */
+        .benefits {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .benefit-item {
+            background-color: #e6ffed;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #51cf66;
+        }
+
+        .benefit-item strong {
+            color: #2b9e44;
+        }
+
+        /* Cover page */
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            page-break-after: always;
+            background: linear-gradient(135deg, #1F41BB 0%, #2E5090 100%);
+            color: white;
+            padding: 40px;
+        }
+
+        .cover-page h1 {
+            color: white;
+            font-size: 3em;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .cover-page .subtitle {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cover-page .date {
+            margin-top: 80px;
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+
+        /* TOC */
+        .toc {
+            page-break-after: always;
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 5px;
+        }
+
+        .toc h2 {
+            border: none;
+            padding: 0;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            margin: 12px 0;
+            padding-left: 20px;
+            text-indent: -20px;
+        }
+
+        .toc a {
+            color: #1F41BB;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        /* Section header */
+        .section-header {
+            background-color: #1F41BB;
+            color: white;
+            padding: 20px;
+            margin: 40px 0 20px 0;
+            border-radius: 5px;
+            page-break-after: avoid;
+        }
+
+        .section-header h2 {
+            color: white;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        /* Comparison grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-box {
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            page-break-inside: avoid;
+        }
+
+        .comparison-box.before {
+            border-color: #ff6b6b;
+            background-color: #ffe8e8;
+        }
+
+        .comparison-box.after {
+            border-color: #51cf66;
+            background-color: #e6ffed;
+        }
+
+        .comparison-box h4 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .comparison-box.before h4 {
+            color: #ff6b6b;
+        }
+
+        .comparison-box.after h4 {
+            color: #51cf66;
+        }
+
+        /* Line numbers for code */
+        .line-number {
+            color: #999;
+            display: inline-block;
+            width: 30px;
+            text-align: right;
+            margin-right: 15px;
+        }
+
+        @media print {
+            a { color: #1F41BB; text-decoration: none; }
+            .no-print { display: none; }
+            pre { page-break-inside: avoid; }
+            table { page-break-inside: avoid; }
+            .highlight-box { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cover Page -->
+    <div class="cover-page">
+        <h1>SOLID Principles & BLoC/Cubit</h1>
+        <p class="subtitle">Complete Guide for Professional Flutter Development</p>
+        <p>A comprehensive guide to implementing SOLID principles and BLoC/Cubit state management in Flutter applications</p>
+        <p class="date">March 9, 2026</p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#part1">Part 1: SOLID Principles in Flutter</a></li>
+            <li><a href="#introducton-solid">1.1 Introduction to SOLID</a></li>
+            <li><a href="#s-principle">1.2 Single Responsibility Principle (SRP)</a></li>
+            <li><a href="#o-principle">1.3 Open/Closed Principle (OCP)</a></li>
+            <li><a href="#l-principle">1.4 Liskov Substitution Principle (LSP)</a></li>
+            <li><a href="#i-principle">1.5 Interface Segregation Principle (ISP)</a></li>
+            <li><a href="#d-principle">1.6 Dependency Inversion Principle (DIP)</a></li>
+            <li><a href="#part2">Part 2: BLoC/Cubit State Management</a></li>
+            <li><a href="#intro-bloc">2.1 What is BLoC/Cubit?</a></li>
+            <li><a href="#cubit-pattern">2.2 Cubit Pattern in Detail</a></li>
+            <li><a href="#state-management">2.3 State Management Architecture</a></li>
+            <li><a href="#implementation">2.4 Practical Implementation</a></li>
+            <li><a href="#testing">2.5 Testing Strategies</a></li>
+        </ul>
+    </div>
+
+    <!-- Part 1: SOLID Principles -->
+    <div class="section-header">
+        <h2 id="part1">Part 1: SOLID Principles in Flutter Development</h2>
+    </div>
+
+    <h2 id="introducton-solid">1.1 Introduction to SOLID Principles</h2>
+    <p>SOLID is an acronym for five design principles that make software more understandable, flexible, and maintainable. These principles were developed by Robert C. Martin (Uncle Bob) and have become industry standards for professional software development.</p>
+
+    <div class="highlight-box">
+        <strong>↪ SOLID Stands For:</strong>
+        <ul>
+            <li><strong>S</strong>ingle Responsibility Principle</li>
+            <li><strong>O</strong>pen/Closed Principle</li>
+            <li><strong>L</strong>iskov Substitution Principle</li>
+            <li><strong>I</strong>nterface Segregation Principle</li>
+            <li><strong>D</strong>ependency Inversion Principle</li>
+        </ul>
+    </div>
+
+    <h3>Why SOLID Matters for Flutter Developers</h3>
+    <ul>
+        <li><strong>Code Quality:</strong> Reduces bugs and improves reliability</li>
+        <li><strong>Maintainability:</strong> Makes changes easier without breaking existing code</li>
+        <li><strong>Testability:</strong> Enables unit testing through proper abstraction</li>
+        <li><strong>Scalability:</strong> Allows app to grow without becoming unmaintainable</li>
+        <li><strong>Team Collaboration:</strong> Clear architecture helps other developers understand code</li>
+        <li><strong>Professional Standard:</strong> Industry best practice for production applications</li>
+    </ul>
+
+    <!-- SRP -->
+    <div class="page-break"></div>
+    <h2 id="s-principle">1.2 Single Responsibility Principle (SRP)</h2>
+    <p><strong>Definition:</strong> A class should have one, and only one, reason to change. This means each class should have a single, well-defined responsibility.</p>
+
+    <h3>Problem: Multiple Responsibilities</h3>
+    <p>Before applying SRP, the HomeScreen had multiple responsibilities:</p>
+    <pre><code>class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(...),  // ❌ Drawer responsibility
+      body: Column(
+        children: [
+          // ❌ Drawer header logic
+          DrawerHeader(...),
+          
+          // ❌ Welcome section logic
+          Row(
+            children: [
+              Text('Welcome to Jobseek!'),
+              Text('Discover Jobs'),
+            ],
+          ),
+          
+          // ❌ Search bar logic
+          TextField(...),
+          
+          // ❌ Jobs list logic
+          FeaturedJobsList(...),
+          
+          // ❌ Popular jobs logic
+          PopularJobsList(...),
+        ],
+      ),
+    );
+  }
+}</code></pre>
+
+    <p><strong>Problems:</strong></p>
+    <ul>
+        <li>414 lines in a single file</li>
+        <li>7 widget classes defined inside</li>
+        <li>Hard to test individual components</li>
+        <li>Any change in one section affects the entire file</li>
+        <li>Multiple reasons to change: drawer UI changes, search bar changes, jobs display changes, etc.</li>
+    </ul>
+
+    <h3>Solution: Extract into Separate Widgets</h3>
+    <p>Apply SRP by creating separate, focused files:</p>
+
+    <pre><code>lib/features/home/
+├── home_screen.dart (77 lines)
+└── widgets/
+    ├── drawer_header.dart
+    ├── welcome_header.dart
+    ├── search_row.dart
+    ├── featured_jobs_text.dart
+    ├── featured_jobs_row.dart
+    ├── popular_jobs_text.dart
+    ├── first_popular_container.dart
+    └── second_popular_container.dart</code></pre>
+
+    <p><strong>New HomeScreen (SRP Applied):</strong></p>
+    <pre><code>class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              DrowerHeaderOfHome(),
+              // Drawer items...
+            ],
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                WelcomeHeader(),
+                SizedBox(height: 40),
+                SearchRow(),
+                SizedBox(height: 40),
+                FeaturedJobsText(),
+                SizedBox(height: 20),
+                FeaturedJobsRow(),
+                SizedBox(height: 40),
+                PopularJobsText(),
+                SizedBox(height: 17),
+                FirstPopularContainer(),
+                SizedBox(height: 20),
+                SecondPopularContainer()
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}</code></pre>
+
+    <p><strong>Each widget now has a single responsibility:</strong></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Widget</th>
+                <th>Responsibility</th>
+                <th>Lines of Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>DrowerHeaderOfHome</td>
+                <td>Display user profile in drawer</td>
+                <td>~60</td>
+            </tr>
+            <tr>
+                <td>WelcomeHeader</td>
+                <td>Display welcome greeting</td>
+                <td>~35</td>
+            </tr>
+            <tr>
+                <td>SearchRow</td>
+                <td>Display search bar and filter</td>
+                <td>~40</td>
+            </tr>
+            <tr>
+                <td>FeaturedJobsRow</td>
+                <td>Display featured jobs list</td>
+                <td>~50</td>
+            </tr>
+            <tr>
+                <td>FirstPopularContainer</td>
+                <td>Display single job card</td>
+                <td>~40</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="highlight-box">
+        <strong>✅ Benefits of SRP:</strong>
+        <ul>
+            <li>Each file ~50 lines instead of 414 lines</li>
+            <li>Easy to test individual widgets</li>
+            <li>Easy to reuse widgets in other screens</li>
+            <li>Single reason to change each widget</li>
+            <li>Better readability and maintainability</li>
+        </ul>
+    </div>
+
+    <!-- OCP -->
+    <div class="page-break"></div>
+    <h2 id="o-principle">1.3 Open/Closed Principle (OCP)</h2>
+    <p><strong>Definition:</strong> Classes should be open for extension but closed for modification. You should be able to add new functionality without changing existing code.</p>
+
+    <h3>Problem: Code Duplication</h3>
+    <p>Before OCP, every repository duplicated error handling:</p>
+    <pre><code>class JobsRepo {
+  final ApiServices apiServices;
+  
+  Future&lt;ApiResult&lt;JobsDataModel&gt;&gt; getJobs() async {
+    try {
+      final data = await apiServices.getJobs();
+      return ApiResult.success(data);
+    } catch(e) {
+      return ApiResult.failure(e.toString());
+    }
+  }
+}
+
+class LoginRepo {
+  final ApiServices apiServices;
+  
+  Future&lt;ApiResult&lt;LoginModel&gt;&gt; login(...) async {
+    try {
+      final response = await apiServices.login(...);
+      return ApiResult.success(response);
+    } catch(e) {
+      return ApiResult.failure(e.toString());
+    }
+  }
+}
+
+class RegisterRepo {
+  final ApiServices apiServices;
+  
+  Future&lt;ApiResult&lt;RegisterModel&gt;&gt; register(...) async {
+    try {
+      final response = await apiServices.register(...);
+      return ApiResult.success(response);
+    } catch(e) {
+      return ApiResult.failure(e.toString());
+    }
+  }
+}</code></pre>
+
+    <p><strong>Problems:</strong></p>
+    <ul>
+        <li>Error handling code duplicated 3+ times</li>
+        <li>6 lines of try-catch per repository</li>
+        <li>Bug fix requires changes in multiple places</li>
+        <li>New repositories must copy-paste the pattern</li>
+        <li>Violations of DRY principle (Don't Repeat Yourself)</li>
+    </ul>
+
+    <h3>Solution: Create Base Class with Error Handling</h3>
+    <p><strong>Step 1: Create BaseRepository</strong></p>
+    <pre><code>abstract class BaseRepository {
+  Future&lt;ApiResult&lt;T&gt;&gt; handleApiCall&lt;T&gt;(
+    Future&lt;T&gt; Function() apiCall,
+  ) async {
+    try {
+      final result = await apiCall();
+      return ApiResult.success(result);
+    } catch(e) {
+      return ApiResult.failure(e.toString());
+    }
+  }
+}</code></pre>
+
+    <p><strong>Step 2: Repos Extend BaseRepository</strong></p>
+    <pre><code>class JobsRepo extends BaseRepository {
+  final ApiServices apiServices;
+
+  JobsRepo({required this.apiServices});
+
+  @override
+  Future&lt;ApiResult&lt;JobsDataModel&gt;&gt; getJobs() async =&gt;
+      handleApiCall(() =&gt; apiServices.getJobs());
+}
+
+class LoginRepo extends BaseRepository {
+  final ApiServices apiServices;
+
+  LoginRepo({required this.apiServices});
+
+  @override
+  Future&lt;ApiResult&lt;LoginModel&gt;&gt; login(...) async =&gt;
+      handleApiCall(() =&gt; apiServices.login(...));
+}</code></pre>
+
+    <div class="comparison-grid">
+        <div class="comparison-box before">
+            <h4>❌ Before OCP</h4>
+            <ul>
+                <li>6 lines error handling per repo</li>
+                <li>3 repos × 6 lines = 18 lines duplicated</li>
+                <li>New repo: copy-paste again</li>
+                <li>Bug fix: change 3+ places</li>
+            </ul>
+        </div>
+        <div class="comparison-box after">
+            <h4>✅ After OCP</h4>
+            <ul>
+                <li>Error handling in BaseRepository once</li>
+                <li>1 line per repo method</li>
+                <li>New repo: extend + 1 line</li>
+                <li>Bug fix: change BaseRepository only</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <strong>✅ Benefits of OCP:</strong>
+        <ul>
+            <li>Error handling code written once, used everywhere</li>
+            <li>Adding new repositories is trivial</li>
+            <li>Bug fixes apply globally</li>
+            <li>DRY principle enforced</li>
+            <li>Code is more maintainable and scalable</li>
+        </ul>
+    </div>
+
+    <!-- DIP -->
+    <div class="page-break"></div>
+    <h2 id="d-principle">1.6 Dependency Inversion Principle (DIP)</h2>
+    <p><strong>Definition:</strong> High-level modules should not depend on low-level modules. Both should depend on abstractions. Depend on interfaces, not concrete implementations.</p>
+
+    <h3>Problem: Tight Coupling</h3>
+    <p><strong>Before DIP:</strong> Cubits depend on concrete repository classes</p>
+    <pre><code>class JobsCubit extends Cubit&lt;JobsState&gt; {
+  final JobsRepo jobsRepo;  // ❌ Concrete class, not interface
+  
+  JobsCubit(this.jobsRepo) : super(JobsState.initial());
+  
+  Future&lt;void&gt; getJobs() async {
+    emit(JobsState.loading());
+    final response = await jobsRepo.getJobs();
+    // ...
+  }
+}
+
+class LoginCubit extends Cubit&lt;LoginState&gt; {
+  final LoginRepo loginRepo;  // ❌ Concrete class, not interface
+  
+  LoginCubit(this.loginRepo) : super(LoginState.initial());
+}</code></pre>
+
+    <p><strong>Problems:</strong></p>
+    <ul>
+        <li>Cubits tightly coupled to concrete repository implementations</li>
+        <li>Can't swap real repo with mock repo for testing</li>
+        <li>Must create entire JobsRepo just to test JobsCubit</li>
+        <li>Hard to extend without modifying cubit code</li>
+        <li>Tests become slow and dependent on APIs</li>
+    </ul>
+
+    <h3>Solution: Use Interfaces (Abstract Classes)</h3>
+    <p><strong>Step 1: Create Repository Interfaces</strong></p>
+    <pre><code>abstract class IJobsRepository {
+  Future&lt;ApiResult&lt;JobsDataModel&gt;&gt; getJobs();
+}
+
+abstract class IAuthRepository {
+  Future&lt;ApiResult&lt;LoginModel&gt;&gt; login({
+    required String email,
+    required String password,
+  });
+
+  Future&lt;ApiResult&lt;RegisterModel&gt;&gt; register({
+    required String email,
+    required String password,
+  });
+}</code></pre>
+
+    <p><strong>Step 2: Implementations Follow Interface</strong></p>
+    <pre><code>class JobsRepo extends BaseRepository implements IJobsRepository {
+  final ApiServices apiServices;
+
+  JobsRepo({required this.apiServices});
+
+  @override
+  Future&lt;ApiResult&lt;JobsDataModel&gt;&gt; getJobs() async =&gt;
+      handleApiCall(() =&gt; apiServices.getJobs());
+}
+
+class LoginRepo extends BaseRepository implements IAuthRepository {
+  final ApiServices apiServices;
+
+  LoginRepo({required this.apiServices});
+
+  @override
+  Future&lt;ApiResult&lt;LoginModel&gt;&gt; login(...) async =&gt;
+      handleApiCall(() =&gt; apiServices.login(...));
+  
+  @override
+  Future&lt;ApiResult&lt;RegisterModel&gt;&gt; register(...) async =&gt;
+      handleApiCall(() =&gt; apiServices.register(...));
+}</code></pre>
+
+    <p><strong>Step 3: Cubits Depend on Interfaces</strong></p>
+    <pre><code>class JobsCubit extends Cubit&lt;JobsState&gt; {
+  final IJobsRepository jobsRepository;  // ✅ Interface, not concrete
+  
+  JobsCubit(this.jobsRepository) : super(JobsState.initial());
+  
+  Future&lt;void&gt; getJobs() async {
+    emit(JobsState.loading());
+    final response = await jobsRepository.getJobs();
+    response.when(
+      success: (data) =&gt; emit(JobsState.success(data)),
+      failure: (error) =&gt; emit(JobsState.fail(error)),
+    );
+  }
+}
+
+class LoginCubit extends Cubit&lt;LoginState&gt; {
+  final IAuthRepository authRepository;  // ✅ Interface, not concrete
+  
+  LoginCubit(this.authRepository) : super(LoginState.initial());
+  
+  Future&lt;void&gt; login({required String email, required String password}) async {
+    emit(LoginState.loading());
+    final response = await authRepository.login(email: email, password: password);
+    response.when(
+      success: (data) =&gt; emit(LoginState.success(data)),
+      failure: (error) =&gt; emit(LoginState.fail(error)),
+    );
+  }
+}</code></pre>
+
+    <h3>Benefits for Testing</h3>
+    <p><strong>With DIP, you can easily mock repositories:</strong></p>
+    <pre><code>class MockJobsRepository implements IJobsRepository {
+  @override
+  Future&lt;ApiResult&lt;JobsDataModel&gt;&gt; getJobs() async {
+    return ApiResult.success(
+      JobsDataModel(
+        jobs: [
+          JobsModel(id: 1, jobTitle: 'Flutter Dev', companyName: 'Tech Corp'),
+          JobsModel(id: 2, jobTitle: 'Web Dev', companyName: 'Web Inc'),
+        ],
+      ),
+    );
+  }
+}
+
+void main() {
+  test('JobsCubit emits success state when getJobs succeeds', () async {
+    final mockRepo = MockJobsRepository();
+    final cubit = JobsCubit(mockRepo);
+    
+    await cubit.getJobs();
+    
+    expect(cubit.state, isA&lt;JobsStateSuccess&gt;());
+    verify(mockRepo.getJobs).called(1);
+  });
+}</code></pre>
+
+    <div class="highlight-box">
+        <strong>✅ Benefits of DIP:</strong>
+        <ul>
+            <li>Easy to test without real API calls</li>
+            <li>Swap implementations without changing cubit</li>
+            <li>Loose coupling between layers</li>
+            <li>Extensible: add new repo types easily</li>
+            <li>Better separation of concerns</li>
+        </ul>
+    </div>
+
+    <!-- Part 2: BLoC/Cubit -->
+    <div class="page-break"></div>
+    <div class="section-header">
+        <h2 id="part2">Part 2: BLoC/Cubit State Management</h2>
+    </div>
+
+    <h2 id="intro-bloc">2.1 What is BLoC/Cubit?</h2>
+    <p>BLoC stands for <strong>Business Logic Component</strong>. It's a design pattern for managing state in Flutter applications.</p>
+
+    <h3>BLoC vs Cubit</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>BLoC</th>
+                <th>Cubit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Complexity</td>
+                <td>More complex, event-driven</td>
+                <td>Simpler, method-based</td>
+            </tr>
+            <tr>
+                <td>Method Call</td>
+                <td>bloc.add(Event)</td>
+                <td>cubit.method()</td>
+            </tr>
+            <tr>
+                <td>Boilerplate</td>
+                <td>Event classes + handlers</td>
+                <td>Just methods</td>
+            </tr>
+            <tr>
+                <td>Event History</td>
+                <td>Clear event stream</td>
+                <td>No event history</td>
+            </tr>
+            <tr>
+                <td>Best For</td>
+                <td>Complex state logic</td>
+                <td>Simple to medium apps</td>
+            </tr>
+            <tr>
+                <td>Your App</td>
+                <td>Not used</td>
+                <td>✅ Used for state management</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="info-box">
+        <strong>ℹ️ Your Choice: Cubit</strong>
+        <p>Your Job Founder app uses Cubit because it's simpler and more straightforward for managing state without unnecessary complexity. Cubit is perfect for apps that don't need complex event-driven architecture.</p>
+    </div>
+
+    <h2 id="cubit-pattern">2.2 Cubit Pattern in Detail</h2>
+
+    <h3>The Three Components</h3>
+    <ol>
+        <li><strong>State (Immutable Data):</strong> Represents the current state of the Cubit</li>
+        <li><strong>Cubit (Business Logic):</strong> Contains methods that emit new states</li>
+        <li><strong>BlocBuilder (UI Listener):</strong> Watches Cubit and rebuilds UI when state changes</li>
+    </ol>
+
+    <h3>1. Define Immutable States (using Freezed)</h3>
+    <pre><code>import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'jobs_state.freezed.dart';
+
+@freezed
+class JobsState with _$JobsState {
+  const factory JobsState.initial() = _Initial;
+  
+  const factory JobsState.loading() = _Loading;
+  
+  const factory JobsState.success(JobsDataModel data) = _Success;
+  
+  const factory JobsState.fail(String error) = _Fail;
+}</code></pre>
+
+    <p><strong>What Freezed Provides:</strong></p>
+    <ul>
+        <li>Immutable instances (can't be accidentally modified)</li>
+        <li>Sealed unions (each state is a distinct type)</li>
+        <li>Pattern matching with when() method</li>
+        <li>Automatic copyWith() for cloning</li>
+        <li>Proper == operator and toString()</li>
+    </ul>
+
+    <h3>2. Create Cubit with Business Logic</h3>
+    <pre><code>import 'package:flutter_bloc/flutter_bloc.dart';
+
+class JobsCubit extends Cubit&lt;JobsState&gt; {
+  final IJobsRepository jobsRepository;
+  List&lt;Job&gt; jobs = [];
+  
+  JobsCubit(this.jobsRepository) : super(JobsState.initial());
+  
+  Future&lt;void&gt; getJobs() async {
+    emit(JobsState.loading());
+    try {
+      final response = await jobsRepository.getJobs();
+      response.when(
+        success: (data) {
+          jobs = data.jobs;
+          emit(JobsState.success(data));
+        },
+        failure: (error) =&gt; emit(JobsState.fail(error)),
+      );
+    } catch(e) {
+      emit(JobsState.fail(e.toString()));
+    }
+  }
+}</code></pre>
+
+    <p><strong>Key Methods:</strong></p>
+    <ul>
+        <li><code>emit(state)</code> - Notify listeners of state change</li>
+        <li><code>jobsRepository.getJobs()</code> - Call data layer</li>
+        <li><code>response.when(...)</code> - Pattern match API result</li>
+    </ul>
+
+    <h3>3. Register in Dependency Injection</h3>
+    <pre><code>void _setupJobsDependencies() {
+  // Repository as singleton (shared instance)
+  getIt.registerLazySingleton&lt;IJobsRepository&gt;(
+    () =&gt; JobsRepository(apiServices: getIt&lt;ApiServices&gt;()),
+  );
+  
+  // Cubit as factory (new instance per widget)
+  getIt.registerFactory&lt;JobsCubit&gt;(
+    () =&gt; JobsCubit(getIt&lt;IJobsRepository&gt;()),
+  );
+}</code></pre>
+
+    <p><strong>Registration Strategy:</strong></p>
+    <ul>
+        <li><code>registerLazySingleton</code> for repositories (one instance, shared)</li>
+        <li><code>registerFactory</code> for cubits (new instance per widget)</li>
+    </ul>
+
+    <h3>4. Use in Widget with BlocBuilder</h3>
+    <pre><code>class FeaturedJobsRow extends StatelessWidget {
+  const FeaturedJobsRow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder&lt;JobsCubit, JobsState&gt;(
+      builder: (context, state) =&gt; state.when(
+        initial: () =&gt; const SizedBox(),
+        loading: () =&gt; const Center(
+          child: CircularProgressIndicator(),
+        ),
+        success: (data) =&gt; SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              ...List.generate(data.jobs.length, (index) {
+                return JobCard(job: data.jobs[index]);
+              }),
+            ],
+          ),
+        ),
+        fail: (error) =&gt; Center(
+          child: Text('Error: $error'),
+        ),
+      ),
+    );
+  }
+}</code></pre>
+
+    <p><strong>Pattern Matching with when():</strong></p>
+    <ul>
+        <li>Type-safe: compiler checks all states covered</li>
+        <li>No casting needed</li>
+        <li>Each state handled separately</li>
+        <li>Impossible states prevented</li>
+    </ul>
+
+    <h3>5. Trigger from UI</h3>
+    <pre><code>onPressed: () {
+  context.read&lt;JobsCubit&gt;().getJobs();
+}</code></pre>
+
+    <h2 id="state-management">2.3 State Management Architecture</h2>
+
+    <h3>Complete Flow Diagram (Text Description)</h3>
+    <div class="diagram-section">
+        <div class="diagram-title">User Interaction Flow</div>
+        <pre><code>User taps "Get Jobs" button
+        ↓
+FeaturedJobsRow widget triggered
+        ↓
+context.read&lt;JobsCubit&gt;().getJobs()
+        ↓
+JobsCubit.getJobs() method executes
+        ↓
+emit(JobsState.loading())
+        ↓
+BlocBuilder receives state change
+        ↓
+UI rebuilds with loading spinner
+        ↓
+jobsRepository.getJobs() called
+        ↓
+IJobsRepository interface routed
+        ↓
+JobsRepository implementation executes
+        ↓
+BaseRepository.handleApiCall() wraps with error handling
+        ↓
+ApiServices.getJobs() makes HTTP request
+        ↓
+API returns data or throws error
+        ↓
+BaseRepository wraps in ApiResult
+        ↓
+Result returned to JobsCubit
+        ↓
+emit(JobsState.success(data)) or emit(JobsState.fail(error))
+        ↓
+BlocBuilder receives new state
+        ↓
+UI rebuilds with data or error message</code></pre>
+    </div>
+
+    <h3>Architecture Layers</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Layer</th>
+                <th>Components</th>
+                <th>Responsibility</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Presentation</strong></td>
+                <td>Widgets, BlocBuilder</td>
+                <td>Display UI, trigger user actions</td>
+            </tr>
+            <tr>
+                <td><strong>Business Logic</strong></td>
+                <td>Cubit, Methods</td>
+                <td>Manage state, coordinate between UI and data</td>
+            </tr>
+            <tr>
+                <td><strong>Domain</strong></td>
+                <td>Interfaces, Contracts</td>
+                <td>Define what operations are available</td>
+            </tr>
+            <tr>
+                <td><strong>Data</strong></td>
+                <td>Repository, Models</td>
+                <td>Fetch and manage data</td>
+            </tr>
+            <tr>
+                <td><strong>Network</strong></td>
+                <td>ApiServices, Dio</td>
+                <td>HTTP requests to remote server</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 id="implementation">2.4 Practical Implementation</h2>
+
+    <h3>Complete 5-Step Implementation</h3>
+
+    <p><strong>Step 1: Define State</strong></p>
+    <pre><code>@freezed
+class JobsState with _$JobsState {
+  const factory JobsState.initial() = _Initial;
+  const factory JobsState.loading() = _Loading;
+  const factory JobsState.success(JobsDataModel data) = _Success;
+  const factory JobsState.fail(String error) = _Fail;
+}</code></pre>
+
+    <p><strong>Step 2: Create Cubit</strong></p>
+    <pre><code>class JobsCubit extends Cubit&lt;JobsState&gt; {
+  final IJobsRepository jobsRepository;
+  List&lt;Job&gt; jobs = [];
+  
+  JobsCubit(this.jobsRepository) : super(JobsState.initial());
+  
+  Future&lt;void&gt; getJobs() async {
+    emit(JobsState.loading());
+    final result = await jobsRepository.getJobs();
+    result.when(
+      success: (data) {
+        jobs = data.jobs;
+        emit(JobsState.success(data));
+      },
+      failure: (error) =&gt; emit(JobsState.fail(error)),
+    );
+  }
+}</code></pre>
+
+    <p><strong>Step 3: Setup Dependency Injection</strong></p>
+    <pre><code>void _setupJobsDependencies() {
+  getIt.registerLazySingleton&lt;IJobsRepository&gt;(
+    () =&gt; JobsRepository(apiServices: getIt()),
+  );
+  
+  getIt.registerFactory&lt;JobsCubit&gt;(
+    () =&gt; JobsCubit(getIt()),
+  );
+}</code></pre>
+
+    <p><strong>Step 4: Use in Widget</strong></p>
+    <pre><code>BlocBuilder&lt;JobsCubit, JobsState&gt;(
+  builder: (context, state) =&gt; state.when(
+    initial: () =&gt; SizedBox(),
+    loading: () =&gt; CircularProgressIndicator(),
+    success: (data) =&gt; JobsList(data),
+    fail: (error) =&gt; ErrorWidget(error),
+  ),
+)</code></pre>
+
+    <p><strong>Step 5: Trigger from UI</strong></p>
+    <pre><code>onPressed: () {
+  context.read&lt;JobsCubit&gt;().getJobs();
+}</code></pre>
+
+    <h2 id="testing">2.5 Testing Strategies</h2>
+
+    <h3>Unit Testing Cubit</h3>
+    <pre><code>import 'package:bloc_test/bloc_test.dart';
+import 'package:mockito/mockito.dart';
+
+class MockJobsRepository extends Mock implements IJobsRepository {}
+
+void main() {
+  group('JobsCubit Tests', () {
+    late JobsCubit jobsCubit;
+    late MockJobsRepository mockRepository;
+    
+    setUp(() {
+      mockRepository = MockJobsRepository();
+      jobsCubit = JobsCubit(mockRepository);
+    });
+    
+    tearDown(() {
+      jobsCubit.close();
+    });
+    
+    test('initial state is JobsState.initial()', () {
+      expect(jobsCubit.state, isA&lt;Initial&gt;());
+    });
+    
+    blocTest&lt;JobsCubit, JobsState&gt;(
+      'emits [Loading, Success] when getJobs succeeds',
+      build: () {
+        when(mockRepository.getJobs()).thenAnswer(
+          (_) async =&gt; ApiResult.success(
+            JobsDataModel(jobs: [/* mock jobs */]),
+          ),
+        );
+        return jobsCubit;
+      },
+      act: (cubit) =&gt; cubit.getJobs(),
+      expect: () =&gt; [
+        isA&lt;Loading&gt;(),
+        isA&lt;Success&gt;(),
+      ],
+    );
+    
+    blocTest&lt;JobsCubit, JobsState&gt;(
+      'emits [Loading, Failure] when getJobs fails',
+      build: () {
+        when(mockRepository.getJobs()).thenAnswer(
+          (_) async =&gt; ApiResult.failure('Network error'),
+        );
+        return jobsCubit;
+      },
+      act: (cubit) =&gt; cubit.getJobs(),
+      expect: () =&gt; [
+        isA&lt;Loading&gt;(),
+        isA&lt;Fail&gt;(),
+      ],
+    );
+  });
+}</code></pre>
+
+    <h3>Widget Testing</h3>
+    <pre><code>void main() {
+  testWidgets('FeaturedJobsRow displays jobs', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: BlocProvider(
+          create: (context) =&gt; JobsCubit(mockRepository)..getJobs(),
+          child: Scaffold(
+            body: FeaturedJobsRow(),
+          ),
+        ),
+      ),
+    );
+    
+    // Wait for loading state
+    await tester.pumpAndSettle();
+    
+    // Verify job cards are displayed
+    expect(find.byType(JobCard), findsWidgets);
+  });
+}</code></pre>
+
+    <h3>Different Test Levels</h3>
+    <ul>
+        <li><strong>Unit Test:</strong> Test Cubit logic with mocked repository</li>
+        <li><strong>Widget Test:</strong> Test UI rebuild with real cubit</li>
+        <li><strong>Integration Test:</strong> End-to-end with real API</li>
+    </ul>
+
+    <!-- Summary -->
+    <div class="page-break"></div>
+    <h2>Summary: SOLID + BLoC/Cubit = Professional Architecture</h2>
+
+    <h3>What You've Successfully Implemented</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Principle/Pattern</th>
+                <th>Implementation</th>
+                <th>Benefit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>SRP</strong></td>
+                <td>Separated widgets into 8 files</td>
+                <td>Easy to maintain and reuse</td>
+            </tr>
+            <tr>
+                <td><strong>OCP</strong></td>
+                <td>Created BaseRepository</td>
+                <td>New repos without code duplication</td>
+            </tr>
+            <tr>
+                <td><strong>LSP</strong></td>
+                <td>Both repos implement interface</td>
+                <td>Cubits work with any implementation</td>
+            </tr>
+            <tr>
+                <td><strong>ISP</strong></td>
+                <td>Feature-organized DI</td>
+                <td>Clear dependencies</td>
+            </tr>
+            <tr>
+                <td><strong>DIP</strong></td>
+                <td>Cubits depend on interfaces</td>
+                <td>Easy testing, loose coupling</td>
+            </tr>
+            <tr>
+                <td><strong>Cubit Pattern</strong></td>
+                <td>State management with methods</td>
+                <td>Simple, testable state handling</td>
+            </tr>
+            <tr>
+                <td><strong>Freezed</strong></td>
+                <td>Immutable sealed unions</td>
+                <td>Type-safe state definitions</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="highlight-box">
+        <strong>✅ Key Achievements:</strong>
+        <ul>
+            <li>Reduced HomeScreen from 414 to 77 lines</li>
+            <li>Error handling centralized in BaseRepository</li>
+            <li>All repositories follow SOLID principles</li>
+            <li>Cubits inject interfaces, not concrete classes</li>
+            <li>State management is type-safe and reactive</li>
+            <li>Code is testable with easy mocking</li>
+            <li>Architecture scales to large applications</li>
+        </ul>
+    </div>
+
+    <h2>Next Steps for Continued Learning</h2>
+    <ol>
+        <li><strong>Test Coverage:</strong> Write unit tests for your Cubits</li>
+        <li><strong>More Cubits:</strong> Apply same pattern to NotificationsScreen, ProfileScreen</li>
+        <li><strong>Advanced State:</strong> Handle complex state with multiple properties</li>
+        <li><strong>Repository Functions:</strong> Add searchJobs(), filterJobs() methods</li>
+        <li><strong>Error Handling:</strong> Implement better error models</li>
+        <li><strong>Performance:</strong> Optimize rebuilds with careful BlocBuilder placement</li>
+        <li><strong>Patterns:</strong> Learn Factory, Observer, and other design patterns</li>
+    </ol>
+
+    <div class="highlight-box">
+        <strong>🎯 Industry Standard:</strong>
+        <p>The architecture you've implemented (SOLID + Clean Architecture + BLoC/Cubit) is the professional standard used in production applications at major companies. This knowledge is directly applicable to real-world development jobs and enterprise projects.</p>
+    </div>
+
+    <footer>
+        <p>Complete Guide to SOLID Principles & BLoC/Cubit State Management</p>
+        <p>Job Founder Flutter Application | March 9, 2026</p>
+        <p>For questions or clarification, refer to the diagrams and code examples throughout this document.</p>
+    </footer>
+
+</body>
+</html>

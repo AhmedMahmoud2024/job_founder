@@ -1,18 +1,15 @@
 import 'package:job_founder/core/network/api_result.dart';
 import 'package:job_founder/core/network/api_services.dart';
+import 'package:job_founder/core/repository/base_repository.dart';
+import 'package:job_founder/core/repository/contracts/i_jobs_repository.dart';
 import 'package:job_founder/features/jobs/data/models/jobs_data_model.dart';
 
-class JobsRepo{
+class JobsRepo extends BaseRepository implements IJobsRepository {
   final ApiServices apiServices;
 
   JobsRepo({required this.apiServices});
- Future<ApiResult<JobsDataModel>> getJobs()async{
-   try{
-   final data = await apiServices.getJobs();
-   return ApiResult.success(data);
-   }catch(e){
-    print('error in fetch jobs $e');
-    return ApiResult.failure(e.toString());
-   }
-  }
+
+  @override
+  Future<ApiResult<JobsDataModel>> getJobs() async =>
+      handleApiCall(() => apiServices.getJobs());
 }

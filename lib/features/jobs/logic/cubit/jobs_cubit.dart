@@ -1,20 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:job_founder/core/repository/contracts/i_jobs_repository.dart';
 import 'package:job_founder/features/jobs/logic/cubit/jobs_state.dart';
-import 'package:job_founder/features/jobs/repo/jobs_repo.dart';
 
 import '../../data/models/jobs_data_model.dart';
 
 class JobsCubit extends Cubit<JobsState> {
-  final JobsRepo jobsRepo;
+  final IJobsRepository jobsRepository;
   
-  JobsCubit(this.jobsRepo) : super(JobsState.initial());
+  JobsCubit(this.jobsRepository) : super(JobsState.initial());
  List<JobsModel> jobs=[];
 
-Future<void> getJobs() async{
+Future<void> getJobs() async {
   emit(JobsState.loading());
-  try{
-  final response =await jobsRepo.getJobs();
+  try {
+    final response = await jobsRepository.getJobs();
   response.when(success: (res){
   jobs=res.jobs;
   emit(JobsState.success(res),

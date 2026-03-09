@@ -9,6 +9,7 @@ import 'package:job_founder/core/theme/colors.dart';
 import 'package:job_founder/core/theme/styles.dart';
 import 'package:job_founder/features/apply%20success/apply_scucess.dart';
 import 'package:job_founder/features/home/home_screen.dart';
+import 'package:job_founder/features/home/widgets/first_popular_container.dart';
 
 class ApplyJobScreen extends StatefulWidget {
   const ApplyJobScreen({super.key});
